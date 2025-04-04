@@ -214,7 +214,7 @@ Please change the parent <Route path="${j}"> to <Route path="${j==="/"?"*":`${j}
 `;function SE(){const{name:a}=U1(),[i,s]=M.useState(null),[c,f]=M.useState([]),{theme:d}=wf(),[h,g]=M.useState(10);return M.useEffect(()=>{(async()=>{const m=await hE(a);if(m){s(m);const b=m.abilities.map(async x=>{const C=await mE(x.ability.url);return{name:x.ability.name,description:C}}),T=await Promise.all(b);f(T)}})()},[a]),i?nt.jsxs(ip,{theme:d,children:[nt.jsx(pE,{theme:d,children:i.name}),nt.jsx(yE,{src:i.sprites.front_default,alt:i.name}),nt.jsx(Is,{children:"Movimentos"}),nt.jsx(gE,{children:i.moves.slice(0,h).map(y=>nt.jsx(tf,{theme:d,children:y.move.name},y.move.url))}),h<i.moves.length&&nt.jsx(bE,{onClick:()=>g(h+10),children:"Carregar mais"}),nt.jsx(Is,{children:"Habilidades"}),nt.jsx(rp,{children:c.map(y=>nt.jsxs(tf,{theme:d,children:[nt.jsxs("strong",{children:[y.name,":"]}),nt.jsx(vE,{children:y.description})]},y.name))}),nt.jsx(Is,{children:"Tipos"}),nt.jsx(rp,{children:i.types.map(y=>nt.jsx(tf,{theme:d,children:y.type.name},y.type.url))}),nt.jsx(Rr,{to:"/",children:nt.jsx(Du,{children:"Home"})})]}):nt.jsx(ip,{theme:d,children:"Carregando..."})}function EE(){return nt.jsxs($1,{children:[nt.jsx(df,{path:"/",element:nt.jsx(dE,{})}),nt.jsx(df,{path:"/pokemon/:name",element:nt.jsx(SE,{})})]})}const RE={light:{color:"#333",background:"#fff",overlay:"rgba(255, 255, 255, 0.3)"},dark:{color:"#fff",background:"#333",overlay:"rgba(0, 0, 0, 0.5)"}},TE=Qt.div`
   min-width: 100vw;
   min-height: 100vh;
-  background-image: url('/img/projeto-pokemon.png');
+  background-image: url('/pokedex-app/img/projeto-pokemon.png');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
