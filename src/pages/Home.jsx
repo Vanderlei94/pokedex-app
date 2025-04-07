@@ -65,8 +65,8 @@ function Home() {
   }, [offset]);
 
   const fetchPokemonsByType = async () => {
-    setDisplayCount(10); // Reset display count on new search
-    setError(''); // Reset error message
+    setDisplayCount(10); 
+    setError(''); 
     if (type) {
       try {
         const response = await axios.get(`https://pokeapi.co/api/v2/type/${type}`);

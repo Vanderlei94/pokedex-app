@@ -78,7 +78,7 @@ function PokemonDetail() {
   const [abilities, setAbilities] = useState([]);
   const { theme } = useTheme();
 
-  const [visibleMoves, setVisibleMoves] = useState(10); // Inicia com 10 movimentos
+  const [visibleMoves, setVisibleMoves] = useState(10); 
 
   useEffect(() => {
     const fetchData = async () => {
