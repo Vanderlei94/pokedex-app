@@ -1,27 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import PokemonList from '../components/PokemonList';
+import PokemonList from '../../components/pokemon-list';
 import axios from 'axios';
-import Button from '../components/StylizedButton';
-import Input from '../components/StylizedInput';
+import Button from '../../components/stylized-button';
+import Input from '../../components/stylized-input';
+import { Container, ErrorMessage } from './styles';
 
-// Componentes estilizados
-const Container = styled.div`
-  padding: 20px;
-  text-align: center;
-  color: ${(props) => (props.theme === 'light' ? '#000000' : '#ffffff')};
-  max-width: 1200px;
-  margin: 0 auto;
-`;
-
-const ErrorMessage = styled.div`
-  color: red;
-  margin-bottom: 10px;
-  font-weight: bold;
-  background-color: #ffe6e6;
-  padding: 10px;
-  border-radius: 5px;
-`;
 
 function Home() {
   const [pokemons, setPokemons] = useState([]);
@@ -64,25 +48,32 @@ function Home() {
     return () => controller.abort();
   }, [offset]);
 
-  const fetchPokemonsByType = async () => {
+  const fetchPokemonByNameOrType = async () => {
     setDisplayCount(10); 
     setError(''); 
-    if (type) {
-      try {
-        const response = await axios.get(`https://pokeapi.co/api/v2/type/${type}`);
-        const pokemonOfType = response.data.pokemon.map(p => p.pokemon);
-        setFilteredPokemons(pokemonOfType);
-        if (pokemonOfType.length === 0) {
-          setError('Nenhum Pokémon encontrado para este tipo.');
-        }
-      } catch (error) {
-        console.error("Erro ao buscar Pokémons por tipo:", error);
-        setError('Tipo de Pokémon incorreto ou não encontrado, digite em inglês.');
+    setFilteredPokemons([]);
+
+    if (!type) return;
+      
+    try {
+      // Primeiro, tenta buscar por nome
+    const response = await axios.get(`https://pokeapi.co/api/v2/pokemon/${type.toLowerCase()}`);
+    setFilteredPokemons([{ name: response.data.name, url: `https://pokeapi.co/api/v2/pokemon/${response.data.name}` }]);
+  } catch (nameError) {
+    try {
+      // Se falhar, tenta por tipo
+      const response = await axios.get(`https://pokeapi.co/api/v2/type/${type.toLowerCase()}`);
+      const pokemonOfType = response.data.pokemon.map(p => p.pokemon);
+      setFilteredPokemons(pokemonOfType);
+
+      if (pokemonOfType.length === 0) {
+        setError('Nenhum Pokémon encontrado para este tipo.');
       }
-    } else {
-      setFilteredPokemons([]);
+    } catch (typeError) {
+      setError('Tipo ou Nome de Pokémon incorreto ou não encontrado, digite em inglês.');
     }
-  };
+  }
+};
 
   const handleTypeChange = (e) => {
     setType(e.target.value);
@@ -90,7 +81,7 @@ function Home() {
 
   const handleKeyDown = (e) => {
     if (e.key === 'Enter') {
-      fetchPokemonsByType();
+      fetchPokemonByNameOrType();
     }
   };
 
@@ -115,7 +106,7 @@ function Home() {
         onKeyDown={handleKeyDown}
         placeholder="Digite o tipo de Pokémon" 
       />
-      <Button onClick={fetchPokemonsByType}>Buscar</Button>
+      <Button onClick={fetchPokemonByNameOrType}>Buscar</Button>
       {error && <ErrorMessage>{error}</ErrorMessage>}
       <PokemonList pokemons={displayedPokemons} />
       <Button

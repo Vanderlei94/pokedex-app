@@ -34,7 +34,7 @@ Abaixo estão algumas capturas de tela demonstrando a interface e funcionalidade
 
 | Página Inicial | Detalhes do Pokémon |
 |----------------|---------------------|
-| ![Home](./public/img/home-preview.png) | ![Detalhes](./public/img/details-preview.png) |
+| ![Home](./public/home-preview.png) | ![Detalhes](./public/details-preview.png) |
 
 ## 🧪 Como Rodar Localmente
 

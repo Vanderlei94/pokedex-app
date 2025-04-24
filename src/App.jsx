@@ -1,12 +1,13 @@
 import React from 'react';
 import GlobalStyle from './styles/GlobalStyle/globalStyles';
 import { HashRouter as Router, Link } from 'react-router-dom';
-import { ThemeProvider, useTheme } from './contexts/theme-context';
-import AppRoutes from './routes/AppRoutes';
+import ThemeToggleButton from './components/theme-toggler';
+import AppRoutes from './routes';
 import styled, { ThemeProvider as StyledThemeProvider } from 'styled-components';
+import { useTheme, ThemeProvider } from './contexts/theme-context';
 import themes from './styles/theme';
-import AppContainer from './components/AppContainer';
-import Button from './components/StylizedButton';
+import AppContainer from './components/app-container';
+import logo from './assets/logo.png';
 
 const Logo = styled.img`
 width: auto;
@@ -24,18 +25,16 @@ display: block;
 
 
 function App() {
-  const { theme, toggleTheme } = useTheme();
+  const { theme } = useTheme();
 
   return (
     <StyledThemeProvider theme={themes[theme]}>
       <AppContainer>
         <Router>
         <LogoLink to="/">
-            <Logo src="/pokedex-app/img/logo.png" alt="Logo" />
+        <Logo src={logo} alt="Logo" />
           </LogoLink>
-          <Button onClick={toggleTheme} style={{ zIndex: 1000, top: '20px', right: '20px' }}>
-            Alternar para {theme === 'light' ? 'escuro' : 'claro'}
-          </Button>
+          <ThemeToggleButton />
           <GlobalStyle />
           <AppRoutes />
         </Router>

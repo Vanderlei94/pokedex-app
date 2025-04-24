@@ -1,9 +1,10 @@
 import styled from 'styled-components';
+import backgroundImage from '../../assets/projeto-pokemon.png';
 
 const AppContainer = styled.div`
   min-width: 100vw;
   min-height: 100vh;
-  background-image: url('/pokedex-app/img/projeto-pokemon.png');
+  background-image: url(${backgroundImage});
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;

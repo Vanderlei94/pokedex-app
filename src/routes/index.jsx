@@ -1,7 +1,7 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
-import Home from '../pages/Home';
-import PokemonDetail from '../components/PokemonDetail';
+import Home from '../pages/home';
+import PokemonDetail from '../pages/pokemon-details-page';
 
 function AppRoutes() {
   return (
