@@ -6,8 +6,8 @@ export default function ThemeToggleButton() {
   const { theme, toggleTheme } = useTheme();
 
   return (
-    <Button onClick={toggleTheme}>
-      Alternar para {theme === 'light' ? 'escuro' : 'claro'}
-    </Button>
+      <Button onClick={toggleTheme}>
+          Alternar para {theme === 'light' ? 'escuro' : 'claro'}
+      </Button>
   );
 }
